@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %} Inscription {% endblock %}
+
+{% block content %}
+
+
+  <div class="container" style="margin: 200px;">
+    <div class="col-md-12 mt-5">
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-danger text-center"><strong>{{message}}</strong></div>
+        {% endfor %}
+        {% endif %}
+
+        <form action="" method="POST" class="form">{% csrf_token %}
+            {{ form.non_field_errors }}
+
+            <div class="card">
+                <div class="card-header text-center"><i class="fas fa-user-lock"></i> Inscription </div>
+                <div class="card-body">
+                 {{form}}
+                </div>
+            </div>
+        </form>
+  </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  const form = document.querySelector('form');
+
+  form.addEventListener('submit', function (event) {
+    const password = form.querySelector('input[name="password"]').value;
+    const passwordConfirm = form.querySelector('input[name="password_confirm"]').value;
+
+    if (password !== passwordConfirm) {
+      alert('Les mots de passe ne correspondent pas.');
+      event.preventDefault(); // Empêche l'envoi du formulaire
+    }
+  });
+});
+</script>
+{% endblock %}

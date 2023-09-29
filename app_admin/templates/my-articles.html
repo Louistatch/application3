@@ -1,0 +1,53 @@
+{% extends 'partials/base.html' %}
+
+{% block content %}
+{% autoescape off %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Mes articles</h2>
+        </div>
+        <div class="col-md-12">
+            <a href="{% url 'ajouter-article' %}" class="btn btn-secondary float-right">
+                <i class="fas fa-plus"></i> Ajouter article
+            </a>
+        </div>
+        <div class="col-md-12">
+            {% if list_articles %}
+            <div class="card">
+                <div class="card-body">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th class="h6">Titre</th>
+                                <th class="h6">Description</th>
+                                <th class="h6">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for article in list_articles %}
+                            <tr>
+                                <td class="h6"><a href="">{{ article }}</a></td>
+                                <td class="h6"><a href="">{{ article.get_desc_without_html }}</a></td>
+                                <td>
+                                    <a href="{% url 'update-article' article.pk %}" class="btn btn-info btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a href="{% url 'delete-article' article.pk %}" class="btn btn-danger btn-sm">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            {% else %}
+            <h3>Vous n'avez rien loo amegan</h3>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endautoescape %}
+{% endblock %}

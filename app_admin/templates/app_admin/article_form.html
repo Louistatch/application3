@@ -1,0 +1,32 @@
+{% extends 'partials/base.html' %}
+<head>
+    {% load static %}
+    <script src="{% static 'js/tinymce/tinymce.min.js' %}" referrerpolicy="origin"></script>
+<script>
+    tinymce.init({
+        selector:'textarea',
+        /* Configurez les options de TinyMCE ici */
+    });
+</script>
+
+</head>
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mt-2">
+                <div class="card-body">
+                    <form action="" method="POST">
+                        {% csrf_token %}
+                        {{form}}
+                        <button class="btn btn-success">Modifier l'article </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
