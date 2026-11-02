@@ -3,7 +3,7 @@ android {
     namespace 'tg.capriterrain.gps'
     compileSdk 35
     defaultConfig {
-        applicationId 'tg.capriterrain.gps'
+        applicationId 'tg.capriterrain.gpspro'
         minSdk 23
         targetSdk 35
         versionCode 3
