@@ -137,6 +137,11 @@ public class MainActivity extends Activity implements LocationListener {
         if(code==REQUEST_SAVE)fileToSave=null;
     }
 
+    @Override public void onBackPressed() {
+        if(web!=null) web.evaluateJavascript("window.CapriHandleBack && window.CapriHandleBack();",null);
+        else super.onBackPressed();
+    }
+
     @Override protected void onDestroy(){
         try{if(manager!=null)manager.removeUpdates(this);}catch(Exception ignore){}
         if(web!=null){web.removeJavascriptInterface("CapriAndroid");web.destroy();web=null;}
