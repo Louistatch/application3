@@ -1,8 +1,7 @@
 name: CapriTerrain GPS - APK Android
 on:
   push:
-    branches:
-      - capriterrain-apk-build
+    branches: [capriterrain-apk-build]
     paths:
       - 'capriterrain/**'
       - '.github/workflows/capriterrain-apk.yml'
@@ -22,9 +21,13 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - name: Installer SDK Android 35
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Installer SDK Android 35 depuis l'environnement GitHub
+        shell: bash
+        run: |
+          echo "ANDROID_HOME=$ANDROID_HOME"
+          export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
+          command -v sdkmanager
+          sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
